@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
+// Import ledger data from data/ledgers file
 import { simple, duplicate, complicated } from '../data/ledgers';
 import TransactionComponent from '../components/transaction';
 import { useEffect, useState } from 'react';
@@ -79,6 +80,7 @@ export default function Home() {
 
   // Sort ledgers on pageload, return balance as well
   useEffect(() => {
+    // Simulating API calls to detch ledger data
     let [ledgers, balance] = sortLedgers(chosenLedgers);
     updateLedgers(ledgers);
     updateBalance(balance);
@@ -89,6 +91,8 @@ export default function Home() {
       {/* Heading --- investing account */}
       <div className="md:flex md:flex-row text-center md:text-left p-6 md:py-8 md:px-20 w-full">
         <h1 className="text-xl md:basis-4/6">Investing Account</h1>
+
+        {/* Toggle to switch between different ledgers */}
         <div className="md:basis-2/6 flex flex-row justify-evenly mt-8 md:mt-0">
           <span
             className="hover:cursor-pointer"
@@ -147,6 +151,7 @@ export default function Home() {
                 transaction={item.type}
                 amount={item.amount}
                 balance={item.balance}
+                // Check if amount is deposited or withdrawn from account
                 negative={parseInt(item.amount) < 0 ? true : false}
                 source={item.source}
                 method={item.method}

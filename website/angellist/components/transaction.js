@@ -62,6 +62,7 @@ const TransactionComponent = ({
         {/* Final divider */}
         <div className="h-[0.15rem] bg-gray-200"></div>
       </div>
+      {/* End of larger screens */}
 
       {/* For smaller screens */}
       <div className="md:hidden p-4 bg-gray-100 rounded-md my-4 mx-2 flex flex-col">
@@ -100,6 +101,7 @@ const TransactionComponent = ({
           </span>
         </div>
       </div>
+      {/* End of smaller screens */}
     </div>
   );
 };
