@@ -1,1 +1,36 @@
-Write your email to Dr. Horrible here.
+*** Part 1: Debugging ***
+
+First I would write an email to Dr. Horrible:
+
+Hi Dr. Horrible,
+Could you please send us any transaction reference you received once the transfer was complete? In case you haven't, please let us know the approximate time and date you made the transfer at.
+Thanks, Team BankUI
+
+If Dr. Horrible transferred the amount directly from his bank account, then they would have a record in their bank servers. In case they transferred the amount from the investment account, perhaps they would not have received a transaction record. In that case, I would proceed with the time and date provided.
+
+Once I have the necessary details, I would write an email to the accounts team.
+
+Hi Accounts,
+Could you please check and confirm whether a transaction was made on so-and-so date from account ID XXXXXX?
+Thanks, BankUI
+
+I would also check the ledger of Startup X to see if the investment is reflecting there.
+
+In case the amount was transferred, I would update the ledger and write back to Dr. Horrible as so:
+
+Hi Dr. Horrible,
+The amount was invested in Startup X successfully. We have updated the ledger, and you should be able to see the transaction details now. 
+We'd like to thank you for bringing this issue to our notice. Our team is working to figure out what went wrong. Rest assured, we will be fixing this quickly.
+Thanks, Team BankUI
+
+
+*** Part 2: Answering the User ***
+
+Hi Dr. Horrible,
+It is with sincere regret that we must inform you that the funding for Startup X closed without your investment. 
+We had been trying to find your investment in the bank's API since you raised a complaint, but unfortunately we were unable to find it before the investment round closed.
+The $10,000 you had wired to Startup X was subsequently found. Needless to say we will be depositing it back, along with a little markup as a token of our apology.
+We can assure you this will never happen again. We have fixed the error, and will ensure this does not repeat. On our part, we will be explaining the situation to Startup X and will be making a request to them to accept your investment.
+We would also like to thank you for bringing this error to our notice. It is because of your complaint that we were able to find the faulty code.
+Once again, we sincerely apologise. We know this is a griveous error, and we will strive to never repeat it again.
+Thank you, Team BankUI
