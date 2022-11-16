@@ -32,7 +32,7 @@ const sortLedgers = (array) => {
   });
 
   // If same date, sort according to transaction type
-  filteredArray.forEach((item, index) => {
+  filteredArray.forEach((_, index) => {
     if (index < filteredArray.length - 1)
       if (
         new Date(filteredArray[index].date) ===
@@ -42,12 +42,13 @@ const sortLedgers = (array) => {
           filteredArray = swapElements(filteredArray, index, index + 1);
       }
   });
-  return filteredArray;
+  return [filteredArray, parseFloat(filteredArray[0].balance).toFixed(2)];
 };
 
+// Component to render the header labels in transaction pane, visible only on larger screens
 const HeaderRow = () => {
   return (
-    <div>
+    <div className="hidden md:block">
       <div className="w-full py-4 flex flex-row justify-start text-left text-gray-400">
         {/* Date column */}
         <div className="basis-1/6">Date</div>
@@ -73,19 +74,47 @@ export default function Home() {
   // Store final balance
   const [balance, updateBalance] = useState(0);
 
-  // Sort ledgers on pageload
+  // Variable to cycle data between simple, duplicate and complex
+  const [chosenLedgers, setChosenLedgers] = useState(complicated);
+
+  // Sort ledgers on pageload, return balance as well
   useEffect(() => {
-    if (!ledgers) updateLedgers(sortLedgers(complicated));
-    if (ledgers) {
-      updateBalance(parseFloat(ledgers[0].balance).toFixed(2));
-    }
-  }, [ledgers]);
+    let [ledgers, balance] = sortLedgers(chosenLedgers);
+    updateLedgers(ledgers);
+    updateBalance(balance);
+  }, [chosenLedgers]);
 
   return (
     <div>
       {/* Heading --- investing account */}
-      <div className="text-center md:text-left p-6 md:py-8 md:px-20 w-full">
-        <h1 className=" text-xl">Investing Account</h1>
+      <div className="md:flex md:flex-row text-center md:text-left p-6 md:py-8 md:px-20 w-full">
+        <h1 className="text-xl md:basis-4/6">Investing Account</h1>
+        <div className="md:basis-2/6 flex flex-row justify-evenly mt-8 md:mt-0">
+          <span
+            className="hover:cursor-pointer"
+            onClick={() => {
+              setChosenLedgers(simple);
+            }}
+          >
+            SIMPLE
+          </span>
+          <span
+            className="hover:cursor-pointer"
+            onClick={() => {
+              setChosenLedgers(duplicate);
+            }}
+          >
+            DUPLICATE
+          </span>
+          <span
+            className="hover:cursor-pointer"
+            onClick={() => {
+              setChosenLedgers(complicated);
+            }}
+          >
+            COMPLEX
+          </span>
+        </div>
       </div>
 
       {/* Banner --- with balance */}
@@ -96,15 +125,15 @@ export default function Home() {
       </div>
 
       {/* Past transactions header */}
-      <div className="md:px-20 px-4 pt-12 text-2xl font-bold">
+      <div className="text-center md:text-left md:px-20 px-4 pt-12 text-2xl font-bold">
         Recent Transactions
       </div>
 
       {/* Divider line */}
-      <div className="h-[0.15rem] bg-gray-200 mx-20 mt-8"></div>
+      <div className="h-[0.15rem] bg-gray-200 mx-4 md:mx-20 mt-8"></div>
 
       {/* Transactions div */}
-      <div className="mx-20 mb-20">
+      <div className="md:mx-20 md:mb-20">
         {/* Headers for transaction section */}
         <HeaderRow />
 
