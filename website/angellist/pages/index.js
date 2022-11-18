@@ -43,10 +43,9 @@ const sortLedgers = (array) => {
         // if (filteredArray[index].type !== 'DEPOSIT')
         //   filteredArray = swapElements(filteredArray, index, index + 1);
         if (
-          parseFloat(
-            filteredArray[index - 1].balance +
-              parseFloat(filteredArray[index].amount.toString())
-          ) !== parseFloat(filteredArray[index].balance.toString())
+          parseFloat(filteredArray[index - 1].balance.toString()) +
+            parseFloat(filteredArray[index].amount.toString()) !==
+          parseFloat(filteredArray[index].balance.toString())
         )
           filteredArray = swapElements(filteredArray, index, index + 1);
       }
