@@ -45,9 +45,7 @@ const sortLedgers = (array) => {
         if (
           parseFloat(
             filteredArray[index - 1].balance +
-              parseFloat(
-                filteredArray[index].amount.toString().replace('-', '')
-              )
+              parseFloat(filteredArray[index].amount.toString())
           ) !== parseFloat(filteredArray[index].balance.toString())
         )
           filteredArray = swapElements(filteredArray, index, index + 1);
