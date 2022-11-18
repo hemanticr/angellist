@@ -1,5 +1,5 @@
 *  Step 1: Filter out duplicate ledgers
 *  Step 2: Sort ledgers according to date
-*  Step 3: If any ledgers have the same date, sort according to type of transaction
+*  Step 3: If any ledgers have the same date, figure out next transaction based on last transaction
 
 Please visit: https://angellist-psi.vercel.app/

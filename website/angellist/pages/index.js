@@ -18,7 +18,7 @@ const sortLedgers = (array) => {
   /**
    *  Step 1: Filter out duplicate ledgers
    *  Step 2: Sort ledgers according to date
-   *  Step 3: If any ledgers have the same date, sort according to type of transaction
+   *  Step 3: If any ledgers have the same date, figure out which transaction is next based on last transaction
    */
 
   // Filter out duplicates
@@ -32,14 +32,24 @@ const sortLedgers = (array) => {
     return new Date(b.date) - new Date(a.date);
   });
 
-  // If same date, sort according to transaction type
+  // If same date, figure out which transaction is next based on last transaction
   filteredArray.forEach((_, index) => {
     if (index < filteredArray.length - 1)
       if (
         new Date(filteredArray[index].date) ===
         new Date(filteredArray[index + 1].date)
       ) {
-        if (filteredArray[index].type !== 'DEPOSIT')
+        // Old code
+        // if (filteredArray[index].type !== 'DEPOSIT')
+        //   filteredArray = swapElements(filteredArray, index, index + 1);
+        if (
+          parseFloat(
+            filteredArray[index - 1].balance +
+              parseFloat(
+                filteredArray[index].amount.toString().replace('-', '')
+              )
+          ) !== parseFloat(filteredArray[index].balance.toString())
+        )
           filteredArray = swapElements(filteredArray, index, index + 1);
       }
   });
